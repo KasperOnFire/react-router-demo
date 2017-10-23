@@ -1,5 +1,3 @@
-//Create a new file App2.js, and copy all from this file into is
-
 import React from "react"
 import { BrowserRouter as Router, Route, Link, NavLink, Switch, Prompt } from "react-router-dom";
 
@@ -115,38 +113,10 @@ class Header extends React.Component {
   }
 }
 
-//DataStore for this Demo
-//Place in a file bookStore.js
-class BookStore {
-
-  constructor() {
-    this._books = [
-      { id: 1,title: "How to Learn JavaScript - Vol 1", info: "Study hard"},
-      { id: 2,title: "How to Learn ES6", info: "Complete all exercises :-)"},
-      { id: 3,title: "How to Learn React",info: "Complete all your CA's"},
-      { id: 4,title: "Learn JavaScript, React and MobX",info: "Don't drink beers, until Friday (after four)"
-      }
-    ]
-    this._nextID= 5;
-  }
-  get books(){
-    return this._books;
-  }
-  addBook(book){
-    book.id = this._nextID;
-    this._books.push(book);
-    this._nextID++;
-  }
-}
-
-let bookStore = new BookStore();
 //Export the instance when placed in a separate file
 //End of BookStore
 
 //Replace the render method in index.js with this and import App2.js
-ReactDOM.render(
-  <App2 bookStore={bookStore}  />, document.getElementById('root'));
-
 
 export default class App2 extends React.Component {
   constructor() {
