@@ -7,18 +7,36 @@ class AddBook extends React.Component {
     super(props);
     this.state = { "book": { title: "", info: "" }, isDirty: false }
   }
-  onSave = () => {}
-  onChange = (e) => {}
+  
+  onSave = () => {
+	let bookStore = this.props.bookStore;
+	console.log("THE BOOK");
+  	console.log(this.state.title);
+	console.log("TITLE above");
+	console.log(this.state.info);
+	console.log("INFO ABOVE");
+	bookStore.addBook(this.state.book);
+  };
+
+  onChange = (e) => {
+		let valName = e.target.name;
+		let value = e.target.value;
+		console.log(valName, value);
+		this.state.book.valName = value; //NOT WORKING
+
+  }
+
   render() {
+	  
     return (
       <div>
-        Title: <input name="title"  />
-        Info: <input name="info" />
+        Title: <input name="title"  onChange={this.onChange}/>
+        Info: <input name="info" onChange={this.onChange}/>
         <button onClick={this.onSave}>Save</button>
         {/*
          <Prompt
          when={this.state.isDirty}
-         message="Yoy have unsaved data that will be lost!"
+         message="You have unsaved data that will be lost!"
          />*/}
       </div>
     )
@@ -45,7 +63,6 @@ const Company = () => {
 class Product extends React.Component {
   constructor(props) {
     super(props);
-    console.log("props",props);
     this.state = { bookStore: props.bookStore }
   }
 
@@ -70,8 +87,7 @@ class Product extends React.Component {
       <Link to={`${match.url}/add`}>Add book</Link>
 
       <div style={{ backgroundColor: "lightGray", padding: 5, marginTop: 10 }}>
-        <Route path={`${match.url}/add`} render={(props) => <AddBook bookStore={bookStore}
-                                                                     onAddBook={this.onBookWasAdded} />} />
+		<Route path={`${match.url}/add`} render={(props) => <AddBook bookStore={bookStore} onAddBook={this.onBookWasAdded} />} />
         <Route path={`${match.url}/detail/:id`} render={(props) => {
           return (<Details {...props} bookStore={bookStore} />)
         }} />
@@ -98,7 +114,6 @@ class Details extends React.Component {
   }
 }
 
-
 class Header extends React.Component {
   render() {
     return (
@@ -112,11 +127,6 @@ class Header extends React.Component {
     );
   }
 }
-
-//Export the instance when placed in a separate file
-//End of BookStore
-
-//Replace the render method in index.js with this and import App2.js
 
 export default class App2 extends React.Component {
   constructor() {
