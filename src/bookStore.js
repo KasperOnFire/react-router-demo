@@ -20,6 +20,10 @@ class BookStore {
 		this._books.push(book);
 		this._nextID++;
 	  }
+
+	  deleteBook(id){
+		this._books.splice(id-1,1);
+	  }
 	}
 	
 	let bookStore = new BookStore();
